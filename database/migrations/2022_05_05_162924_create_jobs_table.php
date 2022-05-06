@@ -18,8 +18,8 @@ class CreateJobsTable extends Migration
             $table->unsignedBigInteger('candidates_id');
             $table->string('job_title');
             $table->string('company_name');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }

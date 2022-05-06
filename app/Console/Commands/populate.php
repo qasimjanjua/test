@@ -39,7 +39,7 @@ class populate extends Command
     {
         $pop = new pop();
         print($pop->readCsv());
-        return ;
+        //return ;
         //return 0;
     }
 }

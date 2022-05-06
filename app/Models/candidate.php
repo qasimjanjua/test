@@ -8,4 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 class candidate extends Model
 {
     use HasFactory;
+    protected $table = 'candidates';
+
+    /**
+     * The database primary key value.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+                  'first_name',
+                  'last_name',
+                  'email',
+              ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+               'created_at',
+               'updated_at',
+           ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
 }
