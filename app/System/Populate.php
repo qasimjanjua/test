@@ -5,6 +5,7 @@ namespace App\System;
 use Carbon\Exceptions\Exception;
 use App\Models\candidate;
 use App\Models\job;
+use Carbon\Carbon;
 /**
  * Populate short summary.
  *
@@ -21,8 +22,9 @@ class Populate
             $candidates = public_path().'/csv/candidates.csv';
             $jobs = public_path().'/csv/jobs.csv';
 
-            print($this->createCandidate($candidates));
-            print($this->createJobs($jobs));
+            $this->createCandidate($candidates);
+            $this->createJobs($jobs);
+            $this->displayData();
         }
         catch(Exception $e)
         {
@@ -71,7 +73,7 @@ class Populate
                 while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                     $jl = [];
                     #check
-                    $check = job::where('id',(int)$data[0])->first();
+                    $check = job::where([['candidates_id',(int)$data[1]],['job_title',$data[2]]])->first();
                     if(!$check)
                     {
                         $jl['id'] = (int)$data[0];
@@ -91,5 +93,18 @@ class Populate
             return true;
         }
         return false;
+    }
+    public function displayData()
+    {
+        $candidates = candidate::all();
+        foreach($candidates as $candidate)
+        {
+            echo("$candidate->first_name $candidate->last_name ");
+            $sortedCandidateJobs = $candidate->sortedCandidateJobs();
+            foreach($sortedCandidateJobs as $job)
+            {
+                echo ("\n\tJob Title:  $job->job_title \n\tCompany Name: $job->company_name \n\tStart Date:". Carbon::createFromFormat('Y-m-d H:i:s', $job->start_date)->format('Y-m-d H:i:s')."\n\tEnd Date: ".  Carbon::createFromFormat('Y-m-d H:i:s', $job->end_date)->format('Y-m-d H:i:s')."\n");
+            }
+        }
     }
 }

@@ -44,4 +44,12 @@ class candidate extends Model
      * @var array
      */
     protected $casts = [];
+    public function candidateJobs()
+    {
+        return $this->hasMany(job::class,'candidates_id');
+    }
+    public function sortedCandidateJobs()
+    {
+        return $this->candidateJobs->sortByDesc('end_date');
+    }
 }
