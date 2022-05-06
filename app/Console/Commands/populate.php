@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\System\Populate as pop;
 class populate extends Command
 {
     /**
@@ -37,7 +37,9 @@ class populate extends Command
      */
     public function handle()
     {
-        print('hello');
+        $pop = new pop();
+        print($pop->readCsv());
+        return ;
         //return 0;
     }
 }
