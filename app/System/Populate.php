@@ -42,9 +42,9 @@ class Populate
 
                 while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                     #check
-                    $check = candidate::where('id',$data[0])->first();
-                    if(!$check)
-                    {
+                    //$check = candidate::where('id',$data[0])->first();
+                    //if(!$check)
+                    //{
                         $da = [];
                         $da['id'] = $data[0];
                         $da['first_name'] = $data[1];
@@ -52,7 +52,7 @@ class Populate
                         $da['email'] = $data[3];
 
                         $canditatesList[] = $da;
-                    }
+                    //}
                 }
 
                 fclose($open);
@@ -73,9 +73,9 @@ class Populate
                 while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                     $jl = [];
                     #check
-                    $check = job::where([['candidates_id',(int)$data[1]],['job_title',$data[2]]])->first();
-                    if(!$check)
-                    {
+                    //$check = job::where([['candidates_id',(int)$data[1]],['job_title',$data[2]]])->first();
+                    //if(!$check)
+                    //{
                         $jl['id'] = (int)$data[0];
                         $jl['candidates_id'] = $data[1];
                         $jl['job_title'] = $data[2];
@@ -84,7 +84,7 @@ class Populate
                         $jl['end_date'] = \DateTime::createFromFormat('d.m.Y H:i', $data[5]);
                         //dd($data[5]);
                         $jobsList[] = $jl;
-                    }
+                    //}
                 }
 
                 fclose($open);
