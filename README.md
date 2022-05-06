@@ -12,5 +12,9 @@ php artisan migrate command
 
 
 run the command 
+
+
 php artisan populate
+
+
 Test the system 
